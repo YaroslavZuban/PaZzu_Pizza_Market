@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pazzu_pizza.HelloController">
+<AnchorPane fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pazzu_pizza.HelloController">
    <children>
       <BorderPane layoutX="21.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
@@ -92,7 +92,7 @@
                            <children>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="81.0" prefWidth="263.0" stylesheets="@values/style.css" text="Тонкое">
+                                    <Button fx:id="thnButton" mnemonicParsing="false" onAction="#thinAction" prefHeight="81.0" prefWidth="263.0" style="-fx-background-color: #FFFFFF;" stylesheets="@values/style.css" text="Тонкое">
                                        <font>
                                           <Font name="Cambria" size="20.0" />
                                        </font>
@@ -101,7 +101,7 @@
                                           <String fx:value="setting-box" />
                                        </styleClass>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="81.0" prefWidth="262.0" stylesheets="@values/style.css" text="Традиционное">
+                                    <Button fx:id="traditionalButton" mnemonicParsing="false" onAction="#traditionalAction" prefHeight="81.0" prefWidth="262.0" stylesheets="@values/style.css" text="Традиционное">
                                        <font>
                                           <Font name="Cambria" size="20.0" />
                                        </font>
@@ -112,19 +112,20 @@
                                     </Button>
                                  </children>
                               </HBox>
+                              <Pane prefHeight="200.0" prefWidth="200.0" />
                               <HBox prefHeight="100.0" prefWidth="335.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="175.0" styleClass="setting-box" stylesheets="@values/style.css" text="25 см">
+                                    <Button fx:id="length_25Button" mnemonicParsing="false" onAction="#length_25" prefHeight="37.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" styleClass="setting-box" stylesheets="@values/style.css" text="25 см">
                                        <font>
                                           <Font name="Cambria" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="175.0" styleClass="setting-box" text="30 см">
+                                    <Button fx:id="length_30Button" mnemonicParsing="false" onAction="#length_30" prefHeight="37.0" prefWidth="175.0" styleClass="setting-box" text="30 см">
                                        <font>
                                           <Font name="Cambria" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="174.0" styleClass="setting-box" text="40 см">
+                                    <Button fx:id="length_40Button" mnemonicParsing="false" onAction="#length_40" prefHeight="37.0" prefWidth="174.0" styleClass="setting-box" text="40 см">
                                        <font>
                                           <Font name="Cambria" size="15.0" />
                                        </font>
@@ -158,15 +159,34 @@
                         <Insets left="20.0" right="20.0" />
                      </VBox.margin>
                      <children>
-                        <Pane prefHeight="50.0" prefWidth="590.0" HBox.hgrow="ALWAYS" />
-                        <Label prefHeight="68.0" prefWidth="127.0" styleClass="shadow" stylesheets="@values/style.css" text="Мой аккаунт">
+                        <Pane prefHeight="100.0" prefWidth="350.0" HBox.hgrow="ALWAYS" />
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#registrationAction" prefHeight="35.0" prefWidth="137.0" stylesheets="@values/style.css" text="Регистрация " textFill="WHITE">
                            <font>
-                              <Font name="Cambria Bold" size="18.0" />
+                              <Font name="Cambria" size="18.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets right="25.0" top="25.0" />
+                           </HBox.margin>
+                           <styleClass>
+                              <String fx:value="search-button" />
+                              <String fx:value="shadow" />
+                           </styleClass>
+                        </Button>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#inputAction" prefHeight="35.0" prefWidth="94.0" stylesheets="@values/style.css" text="Вход" textFill="WHITE">
+                           <font>
+                              <Font name="Cambria" size="18.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="13.0" top="10.0" />
+                              <Insets top="25.0" />
                            </HBox.margin>
-                        </Label>
+                           <styleClass>
+                              <String fx:value="search-button" />
+                              <String fx:value="shadow" />
+                           </styleClass>
+                        </Button>
                         <ImageView fitHeight="74.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@img/корзина.png" />
@@ -230,7 +250,7 @@
                                           <Insets left="10.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <Label alignment="TOP_LEFT" prefHeight="50.0" prefWidth="280.0" styleClass="shadow" stylesheets="@values/style.css" text="получить ваши покупки в тот же день" textFill="WHITE">
+                                    <Label alignment="TOP_LEFT" prefHeight="50.0" prefWidth="267.0" styleClass="shadow" stylesheets="@values/style.css" text="Вы получите пиццу в этот же день" textFill="WHITE">
                                        <font>
                                           <Font name="Cambria" size="15.0" />
                                        </font>

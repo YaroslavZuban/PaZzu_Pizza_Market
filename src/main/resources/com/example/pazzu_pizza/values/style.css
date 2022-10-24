@@ -43,3 +43,11 @@
     -fx-background-color: #ffffff;
     -fx-background-radius: 30;
 }
+
+.input-radius{
+    -fx-background-radius: 30;
+}
+
+.input-color {
+    -fx-background-color: #FFFFFF;
+}
