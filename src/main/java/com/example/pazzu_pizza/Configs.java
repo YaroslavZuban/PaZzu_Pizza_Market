@@ -5,7 +5,7 @@ public class Configs {
     protected String dbPORT="3306";
     protected String dbUSERS="root";
     protected String dbPASS="password";
-    protected String dbNAME="pazzu_pizza";
+    protected String dbNAME="PaZzu_Pizza";
 
 
 }

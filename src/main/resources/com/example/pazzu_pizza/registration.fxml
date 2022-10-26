@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -9,46 +11,54 @@
 
 <AnchorPane fx:id="windowAuthorization" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pazzu_pizza.RegistrationController">
    <children>
-      <Text layoutX="165.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Регистрация">
+      <Text layoutX="165.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.2),10.0 , 0.0 ,0.0 , 10.0);;" text="Регистрация">
          <font>
             <Font name="Cambria" size="24.0" />
          </font>
       </Text>
-      <TextField fx:id="name" layoutX="86.0" layoutY="56.0" prefHeight="40.0" prefWidth="328.0" promptText="Имя" styleClass="input-radius" stylesheets="@values/style.css">
+      <TextField fx:id="name" layoutX="86.0" layoutY="56.0" prefHeight="40.0" prefWidth="328.0" promptText="Имя" stylesheets="@values/style.css">
          <font>
-            <Font name="Cambria" size="16.0" />
+            <Font name="Cambria" size="18.0" />
          </font>
+         <styleClass>
+            <String fx:value="input-radius" />
+            <String fx:value="shadow" />
+         </styleClass>
       </TextField>
-      <TextField fx:id="surname" layoutX="86.0" layoutY="104.0" prefHeight="40.0" prefWidth="328.0" promptText="Фамилия" style="-fx-background-radius: 30;">
+      <TextField fx:id="surname" layoutX="86.0" layoutY="104.0" prefHeight="40.0" prefWidth="328.0" promptText="Фамилия" style="-fx-background-radius: 30;" styleClass="shadow" stylesheets="@values/style.css">
          <font>
             <Font name="Cambria" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="email" layoutX="86.0" layoutY="154.0" prefHeight="40.0" prefWidth="328.0" promptText="Email" style="-fx-background-radius: 30;">
+      <TextField fx:id="email" layoutX="86.0" layoutY="154.0" prefHeight="40.0" prefWidth="328.0" promptText="Email" style="-fx-background-radius: 30;" styleClass="shadow" stylesheets="@values/style.css">
          <font>
-            <Font name="Cambria" size="16.0" />
+            <Font name="Cambria" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="password" layoutX="86.0" layoutY="200.0" prefHeight="40.0" prefWidth="328.0" promptText="Пароль" style="-fx-background-radius: 30;">
+      <TextField fx:id="telephone" layoutX="86.0" layoutY="248.0" prefHeight="40.0" prefWidth="328.0" promptText="Телефон" style="-fx-background-radius: 30;" styleClass="shadow" stylesheets="@values/style.css">
          <font>
-            <Font name="Cambria" size="16.0" />
+            <Font name="Cambria" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="telephone" layoutX="86.0" layoutY="248.0" prefHeight="40.0" prefWidth="328.0" promptText="Телефон" style="-fx-background-radius: 30;">
-         <font>
-            <Font name="Cambria" size="16.0" />
-         </font>
-      </TextField>
-      <Button layoutX="169.0" layoutY="348.0" mnemonicParsing="false" onAction="#authorizationActon" prefHeight="30.0" prefWidth="130.0" styleClass="search-button" stylesheets="@values/style.css" text="Авторизоваться " textFill="WHITE">
+      <Button layoutX="169.0" layoutY="348.0" mnemonicParsing="false" onAction="#authorizationActon" prefHeight="30.0" prefWidth="130.0" stylesheets="@values/style.css" text="Авторизоваться " textFill="WHITE">
          <font>
             <Font name="Cambria" size="14.0" />
          </font>
+         <styleClass>
+            <String fx:value="search-button" />
+            <String fx:value="shadow" />
+         </styleClass>
       </Button>
-      <DatePicker fx:id="data" layoutX="234.0" layoutY="300.0" prefHeight="30.0" prefWidth="180.0" />
-      <Text layoutX="72.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дата рождения">
+      <DatePicker fx:id="data" layoutX="234.0" layoutY="300.0" prefHeight="30.0" prefWidth="180.0" styleClass="shadow" stylesheets="@values/style.css" />
+      <Text layoutX="72.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.2),10.0 , 0.0 ,0.0 , 10.0);" styleClass="values\style.css" text="Дата рождения">
          <font>
             <Font name="Cambria" size="22.0" />
          </font>
       </Text>
+      <PasswordField fx:id="password" layoutX="86.0" layoutY="200.0" prefHeight="40.0" prefWidth="328.0" promptText="Пароль" style="-fx-background-radius: 30;" styleClass="shadow" stylesheets="@values/style.css">
+         <font>
+            <Font name="Cambria" size="18.0" />
+         </font>
+      </PasswordField>
    </children>
 </AnchorPane>

@@ -12,10 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -239,6 +236,7 @@ public class HelloController implements Initializable {
     @FXML
     void registrationAction(ActionEvent event) throws IOException {
         windowWord("registration.fxml");
+
     }
 
     private void windowWord(String fxml) throws IOException {
@@ -255,6 +253,5 @@ public class HelloController implements Initializable {
         stage.setScene(scene);//установка Scene для Stage
         stage.setResizable(false);//запрещает пользователю изменять размер окна
         stage.show();//Попытки показать это окно, установив для видимости значение true
-
     }
 }
