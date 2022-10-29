@@ -1,7 +1,6 @@
 package com.example.pazzu_pizza;
 
 import com.example.pazzu_pizza.model.Pizza;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;

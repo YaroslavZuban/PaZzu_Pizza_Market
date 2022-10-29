@@ -51,3 +51,17 @@
 .input-color {
     -fx-background-color: #FFFFFF;
 }
+
+.rect-round{
+    -fx-background-radius: 30;
+}
+
+.secondary-background{
+    -fx-background-color: #FEBF00;
+}
+
+
+.button-flat{
+    -fx-background-radius: 90;
+}
+

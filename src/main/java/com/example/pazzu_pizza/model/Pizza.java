@@ -5,6 +5,28 @@ public class Pizza {
     private String imgSrc;
     private double price;
 
+    public String getSize() {
+        return size;
+    }
+
+    public String getTypeDough() {
+        return typeDough;
+    }
+
+    private String size;
+    private String typeDough;
+
+    public Pizza(String name, String image, double price, String size, String typeDough) {
+        this.name = name;
+        this.imgSrc = image;
+        this.price = price;
+        this.size = size;
+        this.typeDough = typeDough;
+    }
+
+    public Pizza() {
+    }
+
     public void setName(String name) {
         this.name = name;
     }

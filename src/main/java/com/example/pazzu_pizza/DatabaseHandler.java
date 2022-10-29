@@ -27,14 +27,7 @@ public class DatabaseHandler extends Configs {
 
         PreparedStatement prSt = null;
         try {
-            prSt = getDbConnection().prepareStatement(insert);
-
-            prSt.setString(1, user.getName());
-            prSt.setString(2, user.getSurname());
-            prSt.setString(3, user.getEmail());
-            prSt.setString(4, user.getPassword());
-            prSt.setString(5, user.getTelephone());
-            prSt.setString(6, user.getBirth());
+            prSt = getPreparedStatement(user, insert);
 
             prSt.executeUpdate();
         } catch (SQLException | ClassNotFoundException e) {
@@ -47,15 +40,14 @@ public class DatabaseHandler extends Configs {
         ResultSet resultSet = null;
 
         String select = "SELECT * FROM " + Const.USER_TABLE + " WHERE " +
-                Const.USERS_EMAIL + "=? AND " + Const.USERS_PASSWORD + "=?";
+                Const.USERS_NAME + "=? AND " + Const.USERS_SURNAME + "=? AND " +
+                Const.USERS_EMAIL + "=? AND " + Const.USERS_PASSWORD + "=? AND " +
+                Const.USERS_TELEPHONE + "=? AND " + Const.USERS_BIRTHS + "=?";
 
         PreparedStatement prSt = null;
 
         try {
-            prSt = getDbConnection().prepareStatement(select);
-
-            prSt.setString(1, user.getEmail());
-            prSt.setString(2, user.getPassword());
+            prSt = getPreparedStatement(user, select);
 
             resultSet = prSt.executeQuery();
         } catch (SQLException | ClassNotFoundException e) {
@@ -63,5 +55,18 @@ public class DatabaseHandler extends Configs {
         }
 
         return resultSet;
+    }
+
+    private PreparedStatement getPreparedStatement(User user, String select) throws SQLException, ClassNotFoundException {
+        PreparedStatement prSt;
+        prSt = getDbConnection().prepareStatement(select);
+
+        prSt.setString(1, user.getName());
+        prSt.setString(2, user.getSurname());
+        prSt.setString(3, user.getEmail());
+        prSt.setString(4, user.getPassword());
+        prSt.setString(5, user.getTelephone());
+        prSt.setString(6, user.getBirth());
+        return prSt;
     }
 }

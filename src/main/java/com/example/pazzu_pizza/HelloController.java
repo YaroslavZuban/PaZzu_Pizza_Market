@@ -15,7 +15,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,6 +27,12 @@ public class HelloController implements Initializable {
 
     @FXML
     private Label namePizzaLabel;
+
+    @FXML
+    public Button inputButton;
+
+    @FXML
+    public Button registrationButton;
 
     @FXML
     private ImageView pizzaImg;
@@ -56,16 +61,23 @@ public class HelloController implements Initializable {
     @FXML
     private Button traditionalButton;
 
-
     private String doughType = "Тонкое";
     private String sizePizza = "25 см";
 
     private List<Pizza> pizza = new ArrayList<>();
+
+    private List<Pizza> basket=new ArrayList<>();
     private Image image;
     private MyListener myListener;
+    private User user;
 
     @FXML
     private AnchorPane window;
+
+    private String path="img/pepperoni.png";
+    public List<Pizza> getBasket() {
+        return basket;
+    }
 
     private List<Pizza> getData() {
         List<Pizza> pizza = new ArrayList<>();
@@ -130,14 +142,51 @@ public class HelloController implements Initializable {
         return pizza;
     }
 
+
+    public HelloController getThis(){
+        return this;
+    }
+
+    @FXML
+    void basketActon(ActionEvent event) throws IOException {
+        Stage ss = (Stage) window.getScene().getWindow();//береться параметры стратого она и закрывается
+        ss.close();//закрытия окна
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("basket.fxml"));//считывание дизайн самого интерфейса
+
+        BasketController.helloController=this;
+
+        Stage stage=new Stage();
+        Scene scene = new Scene(fxmlLoader.load());//запуск дизайн
+        stage.setTitle("PaZzU Pizza");//название окна
+     //   stage.getIcons().add(new Image(HelloApplication.class.getResourceAsStream("bit.png")));//установление иконки
+        stage.setScene(scene);//установка Scene для Stage
+        stage.setResizable(false);//запрещает пользователю изменять размер окна
+        stage.show();//Попытки показать это окно, установив для видимости значение true
+    }
+
     private void setChosenPizza(Pizza pizza) {
         namePizzaLabel.setText(pizza.getName());
-        pricePizza.setText("$" + pizza.getPrice());
+        pricePizza.setText(String.valueOf(pizza.getPrice()));
+        path=pizza.getImgSrc();
         image = new Image(getClass().getResourceAsStream(pizza.getImgSrc()));
         pizzaImg.setImage(image);
         chosenPizzaCard.setStyle("-fx-background-radius: 30;");
     }
 
+    @FXML
+    void addBasketAction(ActionEvent event) {
+        Pizza temp=new Pizza(namePizzaLabel.getText(),path,Double.parseDouble(pricePizza.getText()),
+                sizePizza,doughType);
+
+        basket.add(temp);
+    }
+
+
+    /***
+     * Функция которая созддает пиццы в окнах
+     * Доработать нужно, чтобы пицца считывалась с базы данных
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         pizza.addAll(getData());
@@ -229,13 +278,36 @@ public class HelloController implements Initializable {
 
     @FXML
     void inputAction(ActionEvent event) throws IOException {
-        windowWord("input.fxml");
-    }
+        if(inputButton.getText().equals("Выход")){
+            user=null;
+            inputButton.setText("Вход");
+            registrationButton.setText("Регистрация");
+        }else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("input.fxml"));
 
+            Stage stage = new Stage();//создается stage для запуска нового окна
+            Scene scene = new Scene(loader.load());//загружается дизайн с fxml
+
+            stage.setTitle("PaZzu-Pizza");//название нового окна
+            // stage.getIcons().add(new Image(HelloApplication.class.getResourceAsStream("bit.png")));//значок нового окна
+            stage.setScene(scene);//установка Scene для Stage
+            stage.setResizable(false);//запрещает пользователю изменять размер окна
+            stage.show();//Попытки показать это окно, установив для видимости значение true
+
+            InputController inputController = loader.getController();
+            inputController.setMainController(this);
+        }
+    }
 
     @FXML
     void registrationAction(ActionEvent event) throws IOException {
-        windowWord("registration.fxml");
+        if(registrationButton.getText().equals("Регистрация")){
+            windowWord("registration.fxml");
+        }else if(registrationButton.getText().equals("admin")){
+
+        }else{
+
+        }
 
     }
 
@@ -253,5 +325,9 @@ public class HelloController implements Initializable {
         stage.setScene(scene);//установка Scene для Stage
         stage.setResizable(false);//запрещает пользователю изменять размер окна
         stage.show();//Попытки показать это окно, установив для видимости значение true
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

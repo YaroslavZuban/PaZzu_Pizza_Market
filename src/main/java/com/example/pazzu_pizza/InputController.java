@@ -21,6 +21,9 @@ public class InputController {
     @FXML
     private PasswordField password;
 
+    private HelloController helloController;
+    private User user;
+
     @FXML
     void authorizationActon(ActionEvent event) throws InterruptedException {
         String loginText = login.getText().trim();
@@ -34,6 +37,10 @@ public class InputController {
             try {
                 loginUser(loginText, passwordText);
 
+                helloController.setUser(user);
+                helloController.registrationButton.setText(user.getEmail());
+                helloController.inputButton.setText("Выход");
+
                 Stage stage = (Stage) windowInput.getScene().getWindow();
                 stage.close();
             } catch (SQLException | InterruptedException e) {
@@ -44,12 +51,13 @@ public class InputController {
 
     private void loginUser(String loginText, String passwordText) throws SQLException, InterruptedException {
         DatabaseHandler databaseHandler = new DatabaseHandler();
-        User user = new User();
+        this.user = new User();
 
         user.setEmail(loginText);
         user.setPassword(passwordText);
 
         ResultSet resultSet = databaseHandler.getUser(user);
+        HelloController helloController = new HelloController();
         int counter = 0;
 
         while (resultSet.next()) {
@@ -57,7 +65,7 @@ public class InputController {
         }
 
         if (counter >= 1) {
-            System.out.println("Succes!");
+
         } else {
             Shake shakeLogin = new Shake(login);
             Shake shakePassword = new Shake(password);
@@ -67,4 +75,8 @@ public class InputController {
         }
     }
 
+    public void setMainController(HelloController _helloController) {
+        this.helloController = _helloController;
+        helloController.setUser(user);
+    }
 }
