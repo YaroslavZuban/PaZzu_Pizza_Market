@@ -31,7 +31,7 @@ public class CharacteristicsPizza {
         this.typeAndSize.setText("размер "+pizza.getSize()+
                 ", тип теста "+pizza.getTypeDough());
         this.number.setText("1");
-        this.price.setText(String.valueOf(pizza.getPrice()));
+      //  this.price.setText(String.valueOf(pizza.getPrice()));
 
         Image image = new Image(getClass().getResourceAsStream(pizza.getImgSrc()));
         this.imgLabel.setImage(image);

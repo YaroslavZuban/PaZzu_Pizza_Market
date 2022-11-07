@@ -15,9 +15,6 @@ public class ItemController {
     private Label nameLabel;
 
     @FXML
-    private Label priceLabel;
-
-    @FXML
     private void click(MouseEvent mouseEvent){
         myListener.onClickListener(pizza);
     }
@@ -29,8 +26,8 @@ public class ItemController {
         this.pizza = pizza;
         this.myListener=myListener;
         nameLabel.setText(pizza.getName());
-        priceLabel.setText(HelloApplication.CURRENCY + pizza.getPrice());
-        Image image = new Image(getClass().getResourceAsStream(pizza.getImgSrc()));
+
+        Image image = new Image("file:"+pizza.getImgSrc());
         imgLabel.setImage(image);
     }
 

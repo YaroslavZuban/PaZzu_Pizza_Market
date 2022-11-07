@@ -20,9 +20,9 @@ public class DatabaseHandler extends Configs {
     }
 
     public void singUpUser(User user) {
-        String insert = "INSERT INTO " + Const.USER_TABLE + "(" + Const.USERS_NAME + "," +
-                Const.USERS_SURNAME + "," + Const.USERS_EMAIL + "," + Const.USERS_PASSWORD + "," +
-                Const.USERS_TELEPHONE + "," + Const.USERS_BIRTHS + ")" +
+        String insert = "INSERT INTO " + ConstUser.USER_TABLE + "(" + ConstUser.USERS_NAME + "," +
+                ConstUser.USERS_SURNAME + "," + ConstUser.USERS_EMAIL + "," + ConstUser.USERS_PASSWORD + "," +
+                ConstUser.USERS_TELEPHONE + "," + ConstUser.USERS_BIRTHS + ")" +
                 "VALUES(?,?,?,?,?,?)";
 
         PreparedStatement prSt = null;
@@ -36,18 +36,36 @@ public class DatabaseHandler extends Configs {
 
     }
 
+    public ResultSet existenceTest(User user){
+        ResultSet resultSet = null;
+
+        String select = "SELECT * FROM " + ConstUser.USER_TABLE + " WHERE " +
+                ConstUser.USERS_EMAIL + "=?";
+
+
+        try {
+            PreparedStatement prSt=getDbConnection().prepareStatement(select);;
+            prSt.setString(1,user.getEmail());
+
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return resultSet;
+    }
+
     public ResultSet getUser(User user) {
         ResultSet resultSet = null;
 
-        String select = "SELECT * FROM " + Const.USER_TABLE + " WHERE " +
-                Const.USERS_NAME + "=? AND " + Const.USERS_SURNAME + "=? AND " +
-                Const.USERS_EMAIL + "=? AND " + Const.USERS_PASSWORD + "=? AND " +
-                Const.USERS_TELEPHONE + "=? AND " + Const.USERS_BIRTHS + "=?";
+        String select = "SELECT * FROM " + ConstUser.USER_TABLE + " WHERE " +
+                ConstUser.USERS_EMAIL + "=? AND " + ConstUser.USERS_PASSWORD + "=?" ;
 
-        PreparedStatement prSt = null;
 
         try {
-            prSt = getPreparedStatement(user, select);
+            PreparedStatement prSt=getDbConnection().prepareStatement(select);;
+            prSt.setString(1,user.getEmail());
+            prSt.setString(2,user.getPassword());
 
             resultSet = prSt.executeQuery();
         } catch (SQLException | ClassNotFoundException e) {

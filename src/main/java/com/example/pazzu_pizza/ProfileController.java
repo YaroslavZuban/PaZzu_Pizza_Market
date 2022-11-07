@@ -30,4 +30,18 @@ public class ProfileController {
 
     }
 
+    @FXML
+    void ordersAction(ActionEvent actionEvent) {
+
+    }
+
+    @FXML
+     void addItem(ActionEvent actionEvent) {
+
+    }
+
+    @FXML
+     void exitAction(ActionEvent actionEvent) {
+
+    }
 }

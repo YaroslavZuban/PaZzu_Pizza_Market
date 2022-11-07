@@ -1,6 +1,6 @@
 package com.example.pazzu_pizza;
 
-public class Const {
+public class ConstUser {
     public static final String USER_TABLE="users";
 
     public static final String USERS_ID="idusers";

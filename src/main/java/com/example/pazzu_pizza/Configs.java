@@ -7,5 +7,4 @@ public class Configs {
     protected String dbPASS="password";
     protected String dbNAME="PaZzu_Pizza";
 
-
 }

@@ -23,6 +23,7 @@ public class InputController {
 
     private HelloController helloController;
     private User user;
+    private int counter = 0;
 
     @FXML
     void authorizationActon(ActionEvent event) throws InterruptedException {
@@ -37,12 +38,16 @@ public class InputController {
             try {
                 loginUser(loginText, passwordText);
 
-                helloController.setUser(user);
-                helloController.registrationButton.setText(user.getEmail());
-                helloController.inputButton.setText("Выход");
+                if (counter == 1) {
+                    helloController.setUser(user);
+                    helloController.registrationButton.setText(user.getEmail());
+                    helloController.inputButton.setText("Выход");
 
-                Stage stage = (Stage) windowInput.getScene().getWindow();
-                stage.close();
+                    Stage stage = (Stage) windowInput.getScene().getWindow();
+                    stage.close();
+                } else {
+                    Error.error("Такого пользователя не существует", windowInput);
+                }
             } catch (SQLException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -58,15 +63,19 @@ public class InputController {
 
         ResultSet resultSet = databaseHandler.getUser(user);
         HelloController helloController = new HelloController();
-        int counter = 0;
 
         while (resultSet.next()) {
-            counter++;
+            String l = resultSet.getString(4);
+            String p = resultSet.getString(5);
+
+            if (resultSet.getString(4).equals(loginText) &&
+                    resultSet.getString(5).equals(passwordText)) {
+                counter++;
+            }
+
         }
 
-        if (counter >= 1) {
-
-        } else {
+        if (counter == 0) {
             Shake shakeLogin = new Shake(login);
             Shake shakePassword = new Shake(password);
 

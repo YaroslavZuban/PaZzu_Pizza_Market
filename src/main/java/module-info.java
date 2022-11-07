@@ -3,6 +3,7 @@ module com.example.pazzu_pizza {
     requires javafx.fxml;
     requires java.sql;
     requires mysql.connector.j;
+    requires java.desktop;
 
 
     opens com.example.pazzu_pizza to javafx.fxml;

@@ -15,6 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class RegistrationController {
     @FXML
@@ -39,19 +41,19 @@ public class RegistrationController {
     private AnchorPane windowAuthorization;
 
     @FXML
-    void authorizationActon(ActionEvent event) throws IOException, CloneNotSupportedException, InterruptedException {
+    void authorizationActon(ActionEvent event) throws IOException, CloneNotSupportedException, InterruptedException, SQLException {
         if (name.getText().equals("")) {
-            Movement.fieldMovement("имя", name,windowAuthorization);
+            Movement.fieldMovement("имя", name, windowAuthorization);
         } else if (surname.getText().equals("")) {
-            Movement.fieldMovement("фамилию", surname,windowAuthorization);
+            Movement.fieldMovement("фамилию", surname, windowAuthorization);
         } else if (email.getText().equals("")) {
-            Movement.fieldMovement("email", email,windowAuthorization);
+            Movement.fieldMovement("email", email, windowAuthorization);
         } else if (password.getText().equals("")) {
-            Movement.fieldMovement("пароль", password,windowAuthorization);
+            Movement.fieldMovement("пароль", password, windowAuthorization);
         } else if (telephone.getText().equals("")) {
-            Movement.fieldMovement("телефон", telephone,windowAuthorization);
+            Movement.fieldMovement("телефон", telephone, windowAuthorization);
         } else if (String.valueOf(data.getValue()).equals("")) {
-            Movement.fieldMovement("дату", data,windowAuthorization);
+            Movement.fieldMovement("дату", data, windowAuthorization);
         } else {
             signUpNewUser();
 
@@ -60,7 +62,7 @@ public class RegistrationController {
         }
     }
 
-    private void signUpNewUser() {
+    private void signUpNewUser() throws SQLException {
         DatabaseHandler databaseHandler = new DatabaseHandler();
 
         String name_new = name.getText();
@@ -72,8 +74,24 @@ public class RegistrationController {
 
         User user = new User(name_new, surname_new, email_new, password_new, telephone_new, births);
 
-        databaseHandler.singUpUser(user);
+        ResultSet resultSet = databaseHandler.getUser(user);
 
+        int count = 0;
+        while (resultSet.next()) {
+            String login = resultSet.getString(4);
+
+
+            if (resultSet.getString(4).equals(email_new)) {
+                count++;
+            }
+
+        }
+
+        if (count == 0) {
+            databaseHandler.singUpUser(user);
+        } else {
+            Error.error("Данный email уже занят!", windowAuthorization);
+        }
     }
 
 }

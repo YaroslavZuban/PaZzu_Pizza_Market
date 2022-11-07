@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="addWindow" prefHeight="355.0" prefWidth="760.0" stylesheets="@values/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pazzu_pizza.AddAdminPizzaController">
+   <styleClass>
+      <String fx:value="secondary-background" />
+      <String fx:value="shadow" />
+      <String fx:value="input-radius" />
+   </styleClass>
+   <children>
+      <Label layoutX="14.0" layoutY="11.0" prefHeight="50.0" prefWidth="207.0" styleClass="shadow" text="Название пиццы:">
+         <font>
+            <Font name="Cambria Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </Label>
+      <Button alignment="CENTER" layoutX="235.0" layoutY="284.0" mnemonicParsing="false" onAction="#addPizza" prefHeight="50.0" prefWidth="270.0" text="Добавить пиццу" textFill="WHITE">
+         <font>
+            <Font name="Cambria Bold" size="20.0" />
+         </font>
+         <styleClass>
+            <String fx:value="search-button" />
+            <String fx:value="shadow" />
+         </styleClass>
+      </Button>
+      <TextField fx:id="namePizza" layoutX="221.0" layoutY="17.0" prefHeight="44.0" prefWidth="442.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="14.0" layoutY="61.0" prefHeight="50.0" prefWidth="263.0" styleClass="shadow" text="Цена на тонком тесте: ">
+         <font>
+            <Font name="Cambria Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </Label>
+      <TextField fx:id="thin_25" layoutX="356.0" layoutY="73.0" prefHeight="44.0" prefWidth="77.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="thin_30" layoutX="521.0" layoutY="73.0" prefHeight="44.0" prefWidth="69.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="thin_40" layoutX="660.0" layoutY="73.0" prefHeight="44.0" prefWidth="69.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="288.0" layoutY="61.0" prefHeight="50.0" prefWidth="58.0" styleClass="shadow" text="25см">
+         <font>
+            <Font name="Cambria Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </Label>
+      <Label layoutX="455.0" layoutY="61.0" prefHeight="50.0" prefWidth="58.0" styleClass="shadow" text="30см">
+         <font>
+            <Font name="Cambria Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </Label>
+      <Label layoutX="602.0" layoutY="61.0" prefHeight="50.0" prefWidth="58.0" styleClass="shadow" text="40см">
+         <font>
+            <Font name="Cambria Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </Label>
+      <Label layoutX="13.0" layoutY="137.0" prefHeight="50.0" prefWidth="277.0" styleClass="shadow" text="Цена на толстом тесте: ">
+         <font>
+            <Font name="Cambria Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </Label>
+      <TextField fx:id="thick_25" layoutX="355.0" layoutY="149.0" prefHeight="44.0" prefWidth="77.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="thick_30" layoutX="520.0" layoutY="149.0" prefHeight="44.0" prefWidth="69.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="thick_40" layoutX="659.0" layoutY="149.0" prefHeight="44.0" prefWidth="69.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Label layoutX="287.0" layoutY="137.0" prefHeight="50.0" prefWidth="58.0" styleClass="shadow" text="25см">
+         <font>
+            <Font name="Cambria Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </Label>
+      <Label layoutX="454.0" layoutY="137.0" prefHeight="50.0" prefWidth="58.0" styleClass="shadow" text="30см">
+         <font>
+            <Font name="Cambria Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </Label>
+      <Label layoutX="601.0" layoutY="137.0" prefHeight="50.0" prefWidth="58.0" styleClass="shadow" text="40см">
+         <font>
+            <Font name="Cambria Bold" size="24.0" />
+         </font>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </Label>
+      <TextField fx:id="pathImg" layoutX="13.0" layoutY="212.0" prefHeight="44.0" prefWidth="475.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Button alignment="CENTER" layoutX="512.0" layoutY="209.0" mnemonicParsing="false" onAction="#addImg" prefHeight="50.0" prefWidth="213.0" text="Добавить фото" textFill="WHITE">
+         <font>
+            <Font name="Cambria Bold" size="20.0" />
+         </font>
+         <styleClass>
+            <String fx:value="search-button" />
+            <String fx:value="shadow" />
+         </styleClass>
+      </Button>
+   </children>
+   <padding>
+      <Insets left="20.0" />
+   </padding>
+</AnchorPane>
