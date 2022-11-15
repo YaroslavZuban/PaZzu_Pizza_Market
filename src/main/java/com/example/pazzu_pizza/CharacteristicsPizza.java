@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class CharacteristicsPizza {
     @FXML
@@ -20,20 +22,28 @@ public class CharacteristicsPizza {
     @FXML
     private Label price;
 
+     private int pricePizza;
+
+    @FXML
+    private AnchorPane windowsPane;
+
     @FXML
     private Label typeAndSize;
     private Pizza pizza;
 
+    public CharacteristicsPizza() {
+
+    }
 
 
-    public void setInfo(Pizza pizza){
+    public void setInfo(PizzaBasket pizza){
         this.name.setText(pizza.getName());
-        this.typeAndSize.setText("размер "+pizza.getSize()+
-                ", тип теста "+pizza.getTypeDough());
-        this.number.setText("1");
-      //  this.price.setText(String.valueOf(pizza.getPrice()));
-
-        Image image = new Image(getClass().getResourceAsStream(pizza.getImgSrc()));
+        this.typeAndSize.setText("размер "+pizza.getSizePizza()+" см"+
+                ", тип теста "+pizza.getDoughType());
+        pricePizza=pizza.getPrice();
+        this.price.setText(String.valueOf(pizza.getPrice()*pizza.getCounter()));
+        this.number.setText(String.valueOf(pizza.getCounter()));
+        Image image = new Image("file:"+pizza.getImgPath());
         this.imgLabel.setImage(image);
     }
 
@@ -42,16 +52,21 @@ public class CharacteristicsPizza {
         int number= Integer.parseInt(this.number.getText());
         number++;
 
+        this.price.setText(String.valueOf(number*pricePizza));
         this.number.setText(String.valueOf(number));
     }
 
     @FXML
     void minus(ActionEvent event) {
         int number= Integer.parseInt(this.number.getText());
+        number--;
 
-        if(number!=1){
-            number--;
+       /* if(number==0){
+            Stage ss = (Stage) windowsPane.getScene().getWindow();//береться параметры стратого она и закрывается
+            ss.close();
+        }else{
+            this.price.setText(String.valueOf(number*pricePizza));
             this.number.setText(String.valueOf(number));
-        }
+        }*/
     }
 }

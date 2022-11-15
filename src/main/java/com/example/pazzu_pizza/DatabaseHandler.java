@@ -36,7 +36,7 @@ public class DatabaseHandler extends Configs {
 
     }
 
-    public ResultSet existenceTest(User user){
+    public ResultSet existenceTest(User user) {
         ResultSet resultSet = null;
 
         String select = "SELECT * FROM " + ConstUser.USER_TABLE + " WHERE " +
@@ -44,8 +44,9 @@ public class DatabaseHandler extends Configs {
 
 
         try {
-            PreparedStatement prSt=getDbConnection().prepareStatement(select);;
-            prSt.setString(1,user.getEmail());
+            PreparedStatement prSt = getDbConnection().prepareStatement(select);
+            ;
+            prSt.setString(1, user.getEmail());
 
             resultSet = prSt.executeQuery();
         } catch (SQLException | ClassNotFoundException e) {
@@ -55,17 +56,18 @@ public class DatabaseHandler extends Configs {
         return resultSet;
     }
 
-    public ResultSet getUser(User user) {
+    public ResultSet getAllUser(User user) {
         ResultSet resultSet = null;
 
         String select = "SELECT * FROM " + ConstUser.USER_TABLE + " WHERE " +
-                ConstUser.USERS_EMAIL + "=? AND " + ConstUser.USERS_PASSWORD + "=?" ;
+                ConstUser.USERS_EMAIL + "=? AND " + ConstUser.USERS_PASSWORD + "=?";
 
 
         try {
-            PreparedStatement prSt=getDbConnection().prepareStatement(select);;
-            prSt.setString(1,user.getEmail());
-            prSt.setString(2,user.getPassword());
+            PreparedStatement prSt = getDbConnection().prepareStatement(select);
+            ;
+            prSt.setString(1, user.getEmail());
+            prSt.setString(2, user.getPassword());
 
             resultSet = prSt.executeQuery();
         } catch (SQLException | ClassNotFoundException e) {
@@ -74,6 +76,7 @@ public class DatabaseHandler extends Configs {
 
         return resultSet;
     }
+
 
     private PreparedStatement getPreparedStatement(User user, String select) throws SQLException, ClassNotFoundException {
         PreparedStatement prSt;

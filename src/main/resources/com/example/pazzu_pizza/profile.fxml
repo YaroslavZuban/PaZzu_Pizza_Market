@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pazzu_pizza.ProfileController">
+<BorderPane fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pazzu_pizza.ProfileController">
    <left>
       <Pane prefHeight="810.0" prefWidth="479.0" styleClass="right-bar" stylesheets="@values/style.css" BorderPane.alignment="CENTER">
          <children>
@@ -75,7 +75,7 @@
                   </Button>
                   <Pane prefHeight="100.0" prefWidth="213.0" />
                   <Pane prefHeight="100.0" prefWidth="284.0" />
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#inputAction" prefHeight="35.0" prefWidth="120.0" stylesheets="@values/style.css" text="Вход" textFill="WHITE">
+                  <Button fx:id="inputButton" alignment="CENTER" mnemonicParsing="false" onAction="#inputAction" prefHeight="35.0" prefWidth="120.0" stylesheets="@values/style.css" text="Вход" textFill="WHITE">
                      <font>
                         <Font name="Cambria" size="18.0" />
                      </font>
@@ -86,7 +86,7 @@
                   </Button>
                </children>
             </HBox>
-            <Label fx:id="surname" alignment="CENTER" prefHeight="56.0" prefWidth="320.0" styleClass="shadow" text="Личные данные">
+            <Label alignment="CENTER" prefHeight="56.0" prefWidth="320.0" styleClass="shadow" text="Личные данные">
                <font>
                   <Font name="Cambria Bold" size="40.0" />
                </font>
@@ -104,7 +104,7 @@
                         <Insets left="20.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="telephone" prefHeight="49.0" prefWidth="361.0" styleClass="shadow" text="+">
+                  <Label fx:id="telephone" prefHeight="49.0" prefWidth="704.0" styleClass="shadow" text="+">
                      <font>
                         <Font name="Cambria Bold" size="24.0" />
                      </font>
@@ -123,7 +123,7 @@
                         <Insets left="20.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="data" prefHeight="49.0" prefWidth="275.0" styleClass="shadow" text="Дата рождения ">
+                  <Label fx:id="data" prefHeight="50.0" prefWidth="648.0" styleClass="shadow" text="Дата рождения ">
                      <font>
                         <Font name="Cambria Bold" size="24.0" />
                      </font>
@@ -145,7 +145,7 @@
                         <Insets left="20.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="email" prefHeight="49.0" prefWidth="275.0" styleClass="shadow" text="Эл. почта">
+                  <Label fx:id="email" prefHeight="50.0" prefWidth="694.0" styleClass="shadow" text="Эл. почта">
                      <font>
                         <Font name="Cambria Bold" size="24.0" />
                      </font>

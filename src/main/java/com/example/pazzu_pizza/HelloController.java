@@ -2,6 +2,7 @@ package com.example.pazzu_pizza;
 
 import com.example.pazzu_pizza.model.Pizza;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,8 +11,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -26,10 +29,14 @@ import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
+    public static User user;
+    public static List<PizzaBasket> basket = new ArrayList<>();
+
     @FXML
     private VBox chosenPizzaCard;
 
@@ -69,23 +76,86 @@ public class HelloController implements Initializable {
     @FXML
     private Button traditionalButton;
 
+    @FXML
+    private TextField pizzaSearchText;
+
+    private static Boolean isLive = true;
+
+
     private String doughType = "Тонкое";
-    private String sizePizza = "25 см";
+    private String sizePizza = "25";
+
+    private BasketController basketController = new BasketController();
 
     private List<Pizza> pizza = new ArrayList<>();
-
-    private List<Pizza> basket = new ArrayList<>();
     private Image image;
     private MyListener myListener;
-    private User user;
+    private Pizza mainPizza;
+    private static List<Pizza> pizza_copy;
+
 
     @FXML
     private AnchorPane window;
 
-    private String path = "img/pepperoni.png";
+    @FXML
+    private Button search;
 
-    public List<Pizza> getBasket() {
+    private String path = "img/pepperoni.png";
+    private ProfileController profileController;
+
+    public List<PizzaBasket> getBasket() {
         return basket;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    @FXML
+    private void searchPizzaAction(ActionEvent event) throws IOException {
+        if (pizzaSearchText.getText().equals("")) {
+            pizza = pizza_copy;
+        } else {
+            pizza = new ArrayList<>();
+
+            for (int i = 0; i < pizza_copy.size(); i++) {
+                if (pizza_copy.get(i).getName().toLowerCase().contains(pizzaSearchText.getText())) {
+                    pizza.add(pizza_copy.get(i));
+                }
+            }
+        }
+
+        int column = 0;
+        int row = 0;
+
+        grid = new GridPane();
+
+        for (int i = 0; i < pizza.size(); i++) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+
+            fxmlLoader.setLocation(getClass().getResource("Item.fxml"));
+            AnchorPane anchorPane = fxmlLoader.load();
+
+            ItemController itemController = fxmlLoader.getController();
+            itemController.setData(pizza.get(i), myListener);
+
+            if (column == 3) {
+                column = 0;
+                row++;
+            }
+
+            grid.add(anchorPane, column++, row);
+
+            grid.setMinWidth(Region.USE_COMPUTED_SIZE);
+            grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
+            grid.setMaxWidth(Region.USE_COMPUTED_SIZE);
+
+            grid.setMinHeight(Region.USE_COMPUTED_SIZE);
+            grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
+            grid.setMaxHeight(Region.USE_COMPUTED_SIZE);
+
+            GridPane.setMargin(anchorPane, new Insets(10));
+        }
     }
 
     private List<Pizza> getData() throws SQLException, IOException {
@@ -131,29 +201,48 @@ public class HelloController implements Initializable {
 
 
     private void setChosenPizza(Pizza pizza) {
+        mainPizza = pizza;
         namePizzaLabel.setText(pizza.getName());
         path = pizza.getImgSrc();
-        image=new Image("file:"+path);
-        //image = new Image(getClass().getResourceAsStream("/" + pizza.getImgSrc()));
+        image = new Image("file:" + path);
+        pricePizza.setText(pizza.getThin_25());
         pizzaImg.setImage(image);
         chosenPizzaCard.setStyle("-fx-background-radius: 30;");
     }
 
     @FXML
     void addBasketAction(ActionEvent event) {
-        Pizza temp = new Pizza(namePizzaLabel.getText(), path, Double.parseDouble(pricePizza.getText()),
-                sizePizza, doughType);
+        Boolean isDuplicate = true;
 
-        basket.add(temp);
+        for (int i = 0; i < basket.size(); i++) {
+            String namePizza = basket.get(i).getName();
+            String sizePizzaBasket = String.valueOf(basket.get(i).getSizePizza());
+            String typePizza = basket.get(i).getDoughType();
+
+            if (namePizzaLabel.getText().equals(namePizza) &&
+                    sizePizza.equals(sizePizzaBasket) &&
+                    doughType.equals(typePizza)) {
+                basket.get(i).setCounter(basket.get(i).getCounter() + 1);
+                isDuplicate = false;
+                break;
+            }
+        }
+
+        if (isDuplicate) {
+            PizzaBasket pizzaBasket = new PizzaBasket(namePizzaLabel.getText(),
+                    Integer.parseInt(sizePizza), doughType, Integer.parseInt(pricePizza.getText()),
+                    path);
+            basket.add(pizzaBasket);
+        }
     }
 
-
-    /***
-     * Функция которая созддает пиццы в окнах
-     * Доработать нужно, чтобы пицца считывалась с базы данных
-     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (user != null) {
+            registrationButton.setText(user.getEmail());
+            inputButton.setText("Выход");
+        }
+
         try {
             pizza.addAll(getData());
         } catch (SQLException | IOException e) {
@@ -204,6 +293,8 @@ public class HelloController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        pizza_copy = new ArrayList<>(pizza);
     }
 
     @FXML
@@ -211,7 +302,13 @@ public class HelloController implements Initializable {
         length_25Button.setStyle("-fx-background-color: #FFFFFF;");
         length_30Button.setStyle(" -fx-background-color: #B1B5B6;");
         length_40Button.setStyle(" -fx-background-color: #B1B5B6;");
-        sizePizza = "25 см";
+        sizePizza = "25";
+
+        if (doughType.equals("Тонкое")) {
+            pricePizza.setText(mainPizza.getThin_25());
+        } else {
+            pricePizza.setText(mainPizza.getThick_25());
+        }
     }
 
     @FXML
@@ -219,7 +316,13 @@ public class HelloController implements Initializable {
         length_25Button.setStyle("-fx-background-color: #B1B5B6;");
         length_30Button.setStyle(" -fx-background-color: #FFFFFF;");
         length_40Button.setStyle(" -fx-background-color: #B1B5B6;");
-        sizePizza = "30 см";
+        sizePizza = "30";
+
+        if (doughType.equals("Тонкое")) {
+            pricePizza.setText(mainPizza.getThin_30());
+        } else {
+            pricePizza.setText(mainPizza.getThick_30());
+        }
     }
 
     @FXML
@@ -227,7 +330,13 @@ public class HelloController implements Initializable {
         length_25Button.setStyle("-fx-background-color: #B1B5B6;");
         length_30Button.setStyle(" -fx-background-color: #B1B5B6;");
         length_40Button.setStyle(" -fx-background-color: #FFFFFF;");
-        sizePizza = "40 см";
+        sizePizza = "40";
+
+        if (doughType.equals("Тонкое")) {
+            pricePizza.setText(mainPizza.getThin_40());
+        } else {
+            pricePizza.setText(mainPizza.getThick_40());
+        }
     }
 
     @FXML
@@ -235,6 +344,14 @@ public class HelloController implements Initializable {
         thnButton.setStyle("-fx-background-color: #FFFFFF;");
         traditionalButton.setStyle("-fx-background-color: #B1B5B6;");
         doughType = "Тонкое";
+
+        if (sizePizza.equals("25")) {
+            pricePizza.setText(mainPizza.getThin_25());
+        } else if (sizePizza.equals("30")) {
+            pricePizza.setText(mainPizza.getThin_30());
+        } else {
+            pricePizza.setText(mainPizza.getThin_40());
+        }
     }
 
     @FXML
@@ -242,6 +359,14 @@ public class HelloController implements Initializable {
         thnButton.setStyle("-fx-background-color: #B1B5B6;");
         traditionalButton.setStyle("-fx-background-color: #FFFFFF;");
         doughType = "Традиционное";
+
+        if (sizePizza.equals("25")) {
+            pricePizza.setText(mainPizza.getThick_25());
+        } else if (sizePizza.equals("30")) {
+            pricePizza.setText(mainPizza.getThick_30());
+        } else {
+            pricePizza.setText(mainPizza.getThick_40());
+        }
     }
 
 
@@ -275,9 +400,14 @@ public class HelloController implements Initializable {
         if (registrationButton.getText().equals("Регистрация")) {
             windowWord("registration.fxml", false);
         } else if (registrationButton.getText().equals("admin")) {
+            AdminController.user = user;
+            AdminController.basket = basket;
             windowWord("admin.fxml", true);
         } else {
+            ProfileController.user = user;
+            ProfileController.basket = basket;
             windowWord("profile.fxml", true);
+
         }
     }
 

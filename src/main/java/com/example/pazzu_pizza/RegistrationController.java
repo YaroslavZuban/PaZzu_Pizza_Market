@@ -74,7 +74,7 @@ public class RegistrationController {
 
         User user = new User(name_new, surname_new, email_new, password_new, telephone_new, births);
 
-        ResultSet resultSet = databaseHandler.getUser(user);
+        ResultSet resultSet = databaseHandler.getAllUser(user);
 
         int count = 0;
         while (resultSet.next()) {

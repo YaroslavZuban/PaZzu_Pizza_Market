@@ -42,7 +42,7 @@
                         <Insets left="30.0" right="30.0" />
                      </VBox.margin>
                      <children>
-                        <TextField prefHeight="40.0" prefWidth="240.0" promptText="Ведите здесь для поиска" styleClass="transparent" stylesheets="@values/style.css">
+                        <TextField fx:id="pizzaSearchText" prefHeight="40.0" prefWidth="240.0" promptText="Ведите здесь для поиска" styleClass="transparent" stylesheets="@values/style.css">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
@@ -50,7 +50,7 @@
                               <Font name="Cambria" size="18.0" />
                            </font>
                         </TextField>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" styleClass="search-button" stylesheets="@values/style.css" text="Поиск" textFill="WHITE">
+                        <Button fx:id="search" mnemonicParsing="false" onAction="#searchPizzaAction" prefHeight="40.0" prefWidth="100.0" styleClass="search-button" stylesheets="@values/style.css" text="Поиск" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font>

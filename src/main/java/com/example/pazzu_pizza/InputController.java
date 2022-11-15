@@ -22,6 +22,9 @@ public class InputController {
     private PasswordField password;
 
     private HelloController helloController;
+    private BasketController basketController;
+
+    private ProfileController profileController;
     private User user;
     private int counter = 0;
 
@@ -39,9 +42,18 @@ public class InputController {
                 loginUser(loginText, passwordText);
 
                 if (counter == 1) {
-                    helloController.setUser(user);
-                    helloController.registrationButton.setText(user.getEmail());
-                    helloController.inputButton.setText("Выход");
+
+                    if(this.helloController!=null) {
+                        helloController.setUser(user);
+                        helloController.registrationButton.setText(user.getEmail());
+                        helloController.inputButton.setText("Выход");
+                    }else if(this.basketController!=null){
+                        BasketController.user=user;
+                        basketController.inputButton.setText("Выход");
+                    }else if(this.profileController!=null){
+                        ProfileController.user=user;
+                        profileController.inputButton.setText("Выход");
+                    }
 
                     Stage stage = (Stage) windowInput.getScene().getWindow();
                     stage.close();
@@ -61,8 +73,7 @@ public class InputController {
         user.setEmail(loginText);
         user.setPassword(passwordText);
 
-        ResultSet resultSet = databaseHandler.getUser(user);
-        HelloController helloController = new HelloController();
+        ResultSet resultSet = databaseHandler.getAllUser(user);
 
         while (resultSet.next()) {
             String l = resultSet.getString(4);
@@ -88,4 +99,15 @@ public class InputController {
         this.helloController = _helloController;
         helloController.setUser(user);
     }
+
+    public void setBasketController(BasketController _basketController) {
+        this.basketController = _basketController;
+        basketController.setUser(user);
+    }
+
+    public void setProfileController(ProfileController _profileController) {
+        this.profileController = _profileController;
+        ProfileController.setUser(user);
+    }
+
 }

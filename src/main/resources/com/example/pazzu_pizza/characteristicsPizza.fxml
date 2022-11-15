@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="134.0" prefWidth="743.0" stylesheets="@values/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pazzu_pizza.CharacteristicsPizza">
+<AnchorPane fx:id="windowsPane" prefHeight="134.0" prefWidth="743.0" stylesheets="@values/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pazzu_pizza.CharacteristicsPizza">
    <children>
       <VBox alignment="CENTER" layoutX="63.0" prefHeight="200.0" prefWidth="100.0" stylesheets="@values/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -69,7 +69,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Label prefHeight="28.0" prefWidth="43.0" text="Цена">
+                  <Label prefHeight="28.0" prefWidth="49.0" text="Цена:">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
