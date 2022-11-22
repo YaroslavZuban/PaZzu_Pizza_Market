@@ -19,6 +19,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -111,6 +112,7 @@ public class HelloController implements Initializable {
         return user;
     }
 
+
     @FXML
     private void searchPizzaAction(ActionEvent event) throws IOException {
         if (pizzaSearchText.getText().equals("")) {
@@ -119,16 +121,16 @@ public class HelloController implements Initializable {
             pizza = new ArrayList<>();
 
             for (int i = 0; i < pizza_copy.size(); i++) {
-                if (pizza_copy.get(i).getName().toLowerCase().contains(pizzaSearchText.getText())) {
+                if (pizza_copy.get(i).getName().toLowerCase().contains(pizzaSearchText.getText().toLowerCase())) {
                     pizza.add(pizza_copy.get(i));
                 }
             }
         }
 
         int column = 0;
-        int row = 0;
+        int row = 1;
 
-        grid = new GridPane();
+        grid.getChildren().clear();
 
         for (int i = 0; i < pizza.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();

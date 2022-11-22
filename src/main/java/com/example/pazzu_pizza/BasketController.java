@@ -20,17 +20,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class BasketController implements Initializable {
     public static HelloController helloController;
 
-    public  User getUser() {
+    public User getUser() {
         return user;
     }
 
-    public  void setUser(User user) {
+    public void setUser(User user) {
         BasketController.user = user;
     }
 
@@ -40,7 +41,7 @@ public class BasketController implements Initializable {
         this.basket = basket;
     }
 
-    private List<PizzaBasket> basket;
+    public static List<PizzaBasket> basket;
     @FXML
     public Button inputButton;
     @FXML
@@ -80,15 +81,63 @@ public class BasketController implements Initializable {
 
     @FXML
     void confirmOrderAction(ActionEvent event) {
+        if (cityText.getText().equals("") || outsideText.getText().equals("") || houseText.getText().equals("")) {
 
+        } else if (user == null) {
+
+        } else if (basket == null) {
+
+        } else {
+            DatabaseOrders data = new DatabaseOrders();
+
+            String address = "Город: " + cityText.getText() + " улица: " + outsideText.getText() + " дом: " + houseText.getText() + " квартира: "
+                    + flatText.getText();
+
+            if (!entranceText.getText().equals("")) {
+                address += " подъезд: " + entranceText.getText();
+            }
+
+            if (!codeText.getText().equals("")) {
+                address += " код домофона: " + codeText.getText();
+            }
+
+            if (!floorText.getText().equals("")) {
+                address += " этаж: " + floorText.getText();
+            }
+
+            if (!nameCompanyText.getText().equals("")) {
+                address += " название компании: " + nameCompanyText.getText();
+            }
+
+            String comment = commentText.getText();
+
+            System.out.println(user.getName());
+            System.out.println(user.getTelephone());
+
+            for (int i = 0; i < basket.size(); i++) {
+                data.singOrder(user, basket.get(i), address, comment);
+            }
+
+            grid.getChildren().clear();
+            basket.clear();
+            cityText.setText("");
+            outsideText.setText("");
+            houseText.setText("");
+            flatText.setText("");
+            entranceText.setText("");
+            codeText.setText("");
+            floorText.setText("");
+            nameCompanyText.setText("");
+            commentText.setText("");
+        }
     }
 
     @FXML
     void inputAction(ActionEvent event) throws IOException {
-        if(inputButton.getText().equals("Выход")){
-            user=null;
+        if (inputButton.getText().equals("Выход")) {
+            user = null;
             inputButton.setText("Вход");
-        }else{
+        } else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("input.fxml"));
 
             Stage stage = new Stage();//создается stage для запуска нового окна
@@ -126,6 +175,41 @@ public class BasketController implements Initializable {
     }
 
 
+    @FXML
+    public void updateAction(ActionEvent event){
+        grid.getChildren().clear();
+
+        int row = 1;
+
+        try {
+
+            for (int i = 0; i < basket.size(); i++) {
+
+                FXMLLoader fxmlLoader = new FXMLLoader();
+
+                fxmlLoader.setLocation(getClass().getResource("characteristicsPizza.fxml"));
+                AnchorPane anchorPane = fxmlLoader.load();
+
+                CharacteristicsPizza characteristicsPizza = fxmlLoader.getController();
+                characteristicsPizza.setInfo(basket.get(i));
+
+                grid.add(anchorPane, 0, row++);
+
+                grid.setMinWidth(Region.USE_COMPUTED_SIZE);
+                grid.setPrefWidth(Region.USE_COMPUTED_SIZE);
+                grid.setMaxWidth(Region.USE_COMPUTED_SIZE);
+
+                grid.setMinHeight(Region.USE_COMPUTED_SIZE);
+                grid.setPrefHeight(Region.USE_COMPUTED_SIZE);
+                grid.setMaxHeight(Region.USE_COMPUTED_SIZE);
+
+                GridPane.setMargin(anchorPane, new Insets(10));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -139,7 +223,6 @@ public class BasketController implements Initializable {
         }
 
         try {
-
             for (int i = 0; i < basket.size(); i++) {
 
                 FXMLLoader fxmlLoader = new FXMLLoader();

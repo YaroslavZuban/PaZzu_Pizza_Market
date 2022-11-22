@@ -43,15 +43,15 @@ public class InputController {
 
                 if (counter == 1) {
 
-                    if(this.helloController!=null) {
-                        helloController.setUser(user);
+                    if (this.helloController != null) {
+                        HelloController.user = user;
                         helloController.registrationButton.setText(user.getEmail());
                         helloController.inputButton.setText("Выход");
-                    }else if(this.basketController!=null){
-                        BasketController.user=user;
+                    } else if (this.basketController != null) {
+                        BasketController.user = user;
                         basketController.inputButton.setText("Выход");
-                    }else if(this.profileController!=null){
-                        ProfileController.user=user;
+                    } else if (this.profileController != null) {
+                        ProfileController.user = user;
                         profileController.inputButton.setText("Выход");
                     }
 
@@ -76,11 +76,19 @@ public class InputController {
         ResultSet resultSet = databaseHandler.getAllUser(user);
 
         while (resultSet.next()) {
+            String name = resultSet.getString(2);
+            String surname = resultSet.getString(3);
+            String telephone = resultSet.getString(6);
             String l = resultSet.getString(4);
             String p = resultSet.getString(5);
+            String births = resultSet.getString(7);
 
-            if (resultSet.getString(4).equals(loginText) &&
-                    resultSet.getString(5).equals(passwordText)) {
+            if (l.equals(loginText) && p.equals(passwordText)) {
+                user.setName(name);
+                user.setSurname(surname);
+                user.setEmail(l);
+                user.setTelephone(telephone);
+                user.setBirth(births);
                 counter++;
             }
 

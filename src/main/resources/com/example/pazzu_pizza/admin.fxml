@@ -92,7 +92,18 @@
                      </graphic>
                   </Button>
                   <Pane prefHeight="100.0" prefWidth="213.0" />
-                  <Pane prefHeight="100.0" prefWidth="284.0" />
+                  <Pane prefHeight="100.0" prefWidth="284.0">
+                     <children>
+                        <Button layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#updateAction" prefHeight="29.0" prefWidth="45.0" style="-fx-background-color: #FFDF8C;">
+                           <graphic>
+                              <ImageView fitHeight="34.0" fitWidth="38.0">
+                                 <image>
+                                    <Image url="@img/updating.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children></Pane>
                   <Button alignment="CENTER" mnemonicParsing="false" onAction="#exitAction" prefHeight="35.0" prefWidth="120.0" stylesheets="@values/style.css" text="Выход" textFill="WHITE">
                      <font>
                         <Font name="Cambria" size="18.0" />

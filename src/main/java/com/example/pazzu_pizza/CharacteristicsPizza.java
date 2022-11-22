@@ -9,6 +9,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Enumeration;
+import java.util.ResourceBundle;
+
 public class CharacteristicsPizza {
     @FXML
     private ImageView imgLabel;
@@ -22,7 +27,7 @@ public class CharacteristicsPizza {
     @FXML
     private Label price;
 
-     private int pricePizza;
+    private int pricePizza;
 
     @FXML
     private AnchorPane windowsPane;
@@ -30,43 +35,58 @@ public class CharacteristicsPizza {
     @FXML
     private Label typeAndSize;
     private Pizza pizza;
+    private PizzaBasket pb;
 
     public CharacteristicsPizza() {
 
     }
 
-
-    public void setInfo(PizzaBasket pizza){
+    public void setInfo(PizzaBasket pizza) {
+        pb=pizza;
         this.name.setText(pizza.getName());
-        this.typeAndSize.setText("размер "+pizza.getSizePizza()+" см"+
-                ", тип теста "+pizza.getDoughType());
-        pricePizza=pizza.getPrice();
-        this.price.setText(String.valueOf(pizza.getPrice()*pizza.getCounter()));
+        this.typeAndSize.setText("размер " + pizza.getSizePizza() + " см" +
+                ", тип теста " + pizza.getDoughType());
+        pricePizza = pizza.getPrice();
+        this.price.setText(String.valueOf(pizza.getPrice() * pizza.getCounter()));
         this.number.setText(String.valueOf(pizza.getCounter()));
-        Image image = new Image("file:"+pizza.getImgPath());
+        Image image = new Image("file:" + pizza.getImgPath());
         this.imgLabel.setImage(image);
     }
 
     @FXML
     void add(ActionEvent event) {
-        int number= Integer.parseInt(this.number.getText());
+        int number = Integer.parseInt(this.number.getText());
         number++;
 
-        this.price.setText(String.valueOf(number*pricePizza));
+        this.price.setText(String.valueOf(number * pricePizza));
         this.number.setText(String.valueOf(number));
     }
 
     @FXML
-    void minus(ActionEvent event) {
-        int number= Integer.parseInt(this.number.getText());
-        number--;
+    void minus(ActionEvent event) throws MalformedURLException {
 
-       /* if(number==0){
-            Stage ss = (Stage) windowsPane.getScene().getWindow();//береться параметры стратого она и закрывается
-            ss.close();
-        }else{
-            this.price.setText(String.valueOf(number*pricePizza));
+        int number = Integer.parseInt(this.number.getText());
+
+        if(number>0) {
+            number--;
+
+            if (number <= 0) {
+
+                for (int i = 0; i < BasketController.basket.size(); i++) {
+                    PizzaBasket tempP = BasketController.basket.get(i);
+
+                    if (pb.getName().equals(tempP.getName()) && pb.getDoughType().equals(tempP.getDoughType()) &&
+                            pb.getSizePizza() == tempP.getSizePizza()) {
+                        System.out.println("условие выполняется");
+                        BasketController.basket.remove(i);
+                    }
+                }
+
+            }
+
+
+            this.price.setText(String.valueOf(number * pricePizza));
             this.number.setText(String.valueOf(number));
-        }*/
+        }
     }
 }

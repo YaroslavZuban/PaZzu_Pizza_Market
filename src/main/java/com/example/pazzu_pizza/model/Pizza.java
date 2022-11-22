@@ -48,6 +48,16 @@ public class Pizza {
     }
 
     private String size;
+
+    public int getCounterPizza() {
+        return counterPizza;
+    }
+
+    public void setCounterPizza(int counterPizza) {
+        this.counterPizza = counterPizza;
+    }
+
+    private int counterPizza=0;
     private String typeDough;
 
     public Pizza(String name, String image, double price, String size, String typeDough) {

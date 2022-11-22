@@ -61,25 +61,9 @@
             <Insets top="20.0" />
          </padding>
       </Label>
-      <Label fx:id="placeDeliveryLabel_1" alignment="TOP_LEFT" layoutX="207.0" layoutY="64.0" prefHeight="50.0" prefWidth="511.0" styleClass="shadow">
-         <font>
-            <Font name="Cambria Bold" size="14.0" />
-         </font>
-         <padding>
-            <Insets top="20.0" />
-         </padding>
-      </Label>
-      <Label fx:id="placeDeliveryLabel_2" alignment="TOP_LEFT" layoutX="24.0" layoutY="124.0" prefHeight="50.0" prefWidth="700.0" styleClass="shadow">
-         <font>
-            <Font name="Cambria Bold" size="14.0" />
-         </font>
-         <padding>
-            <Insets top="20.0" />
-         </padding>
-      </Label>
       <ScrollPane layoutX="13.0" layoutY="253.0" prefHeight="308.0" prefWidth="714.0">
          <content>
-            <GridPane fx:id="grid" prefHeight="27.0" prefWidth="32.0">
+            <GridPane fx:id="grid" prefHeight="475.0" prefWidth="783.0" styleClass="right-bar" stylesheets="@values/style.css">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -94,7 +78,10 @@
             <Insets top="20.0" />
          </padding>
       </Label>
-      <TextArea fx:id="commentText" layoutX="170.0" layoutY="182.0" prefHeight="50.0" prefWidth="554.0" />
+      <TextArea fx:id="commentText" editable="false" layoutX="170.0" layoutY="182.0" prefHeight="42.0" prefWidth="554.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextArea>
       <Button alignment="CENTER" layoutX="441.0" layoutY="577.0" mnemonicParsing="false" onAction="#orderFulfillmentAction" prefHeight="50.0" prefWidth="270.0" text="Подтвердить заказ" textFill="WHITE">
          <font>
             <Font name="Cambria Bold" size="20.0" />
@@ -104,5 +91,10 @@
             <String fx:value="shadow" />
          </styleClass>
       </Button>
+      <TextArea fx:id="address" editable="false" layoutX="14.0" layoutY="117.0" prefHeight="43.0" prefWidth="708.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextArea>
    </children>
 </AnchorPane>

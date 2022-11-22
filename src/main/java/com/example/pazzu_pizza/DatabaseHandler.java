@@ -45,7 +45,6 @@ public class DatabaseHandler extends Configs {
 
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(select);
-            ;
             prSt.setString(1, user.getEmail());
 
             resultSet = prSt.executeQuery();
@@ -65,7 +64,7 @@ public class DatabaseHandler extends Configs {
 
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(select);
-            ;
+
             prSt.setString(1, user.getEmail());
             prSt.setString(2, user.getPassword());
 

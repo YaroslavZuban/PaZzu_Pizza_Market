@@ -6,7 +6,44 @@ public class PizzaBasket {
     private String doughType;
     private int price;
     private String imgPath;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    private String address;
+    private String comment;
     private int counter=0;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    private User user;
+
+    public PizzaBasket(String name, int sizePizza, String doughType, int price, int counter) {
+        this.name = name;
+        this.sizePizza = sizePizza;
+        this.doughType = doughType;
+        this.price = price;
+        this.counter = counter;
+    }
 
     public PizzaBasket(String name, int sizePizza, String doughType, int price, String imgPath) {
         this.name = name;
