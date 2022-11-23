@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-radius: 30;" styleClass="right-bar" stylesheets="@values/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pazzuPizza.UserOrderController">
+   <children>
+      <Label layoutX="23.0" layoutY="14.0" prefHeight="22.0" prefWidth="42.0" styleClass="shadow" text="Имя:">
+         <font>
+            <Font name="Cambria Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="210.0" layoutY="14.0" prefHeight="22.0" prefWidth="83.0" styleClass="shadow" text="Телефон:">
+         <font>
+            <Font name="Cambria Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="telephone" layoutX="300.0" layoutY="14.0" prefHeight="22.0" prefWidth="146.0" styleClass="shadow" text="telephone">
+         <font>
+            <Font name="Cambria Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="name" layoutX="72.0" layoutY="14.0" prefHeight="22.0" prefWidth="127.0" styleClass="shadow" text="name">
+         <font>
+            <Font name="Cambria Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="23.0" layoutY="42.0" prefHeight="22.0" prefWidth="61.0" styleClass="shadow" text="Адрес:">
+         <font>
+            <Font name="Cambria Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="adres" layoutX="84.0" layoutY="42.0" prefHeight="22.0" prefWidth="492.0" styleClass="shadow" text="adres">
+         <font>
+            <Font name="Cambria Bold" size="18.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="23.0" layoutY="70.0" prefHeight="273.0" prefWidth="555.0">
+         <content>
+            <GridPane fx:id="grid" prefHeight="15.0" prefWidth="21.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
+      <Button alignment="CENTER" layoutX="446.0" layoutY="351.0" mnemonicParsing="false" onAction="#confirmAction" prefHeight="28.0" prefWidth="127.0" text="Подтвердить" textFill="WHITE">
+         <font>
+            <Font name="Cambria Bold" size="14.0" />
+         </font>
+         <styleClass>
+            <String fx:value="search-button" />
+            <String fx:value="shadow" />
+         </styleClass>
+      </Button>
+   </children>
+</AnchorPane>
